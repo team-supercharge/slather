@@ -457,13 +457,7 @@ module Slather
         end
 
         search_list = binary_basename || find_buildable_names(xcscheme)
-        search_dir = profdata_coverage_dir
-
-        if Slather.xcode_version[0] >= 9
-          # Go from the directory containing Coverage.profdata back to the directory containing Products (back out of ProfileData/UUID-dir)
-          search_dir = File.join(search_dir, '../..')
-        end
-
+        search_dir = "./Build"
         search_list.each do |search_for|
           found_product = Dir["#{search_dir}/Products/#{configuration}*/#{search_for}*"].sort { |x, y|
             # Sort the matches without the file extension to ensure better matches when there are multiple candidates
